@@ -372,12 +372,21 @@ class SlidingUpPanel extends React.PureComponent {
     const remainingDistance = animatedValue - options.toValue
     const velocity = options.velocity || remainingDistance / Constants.TIME_CONSTANT // prettier-ignore
 
-    this._flick.start({
-      velocity,
-      toValue: options.toValue,
-      fromValue: animatedValue,
-      friction: this.props.friction
-    })
+    // this._flick.start({
+    //   velocity,
+    //   toValue: options.toValue,
+    //   fromValue: animatedValue,
+    //   friction: this.props.friction
+    // })
+
+    Animated.timing(                  // Animate over time
+      animatedValue,            // The animated value to drive
+      {
+        toValue: options.toValue,                   // Animate to opacity: 1 (opaque)
+        duration: 1000,              // Make it take a while
+      }
+    ).start();
+
   }
 
   _renderBackdrop() {
